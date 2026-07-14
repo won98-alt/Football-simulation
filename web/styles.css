@@ -166,6 +166,12 @@ button:disabled {
   color: #fff;
 }
 
+.plain-button {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
 .main-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -337,6 +343,14 @@ tbody tr:last-child td {
   background: var(--surface-2);
   border: 1px solid var(--line);
   border-radius: 8px;
+}
+
+.data-message {
+  min-height: 20px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .metric-row {

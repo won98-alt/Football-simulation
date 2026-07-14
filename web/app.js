@@ -29,6 +29,7 @@ const KNOCKOUT_ROUNDS = [
 
 const state = {
   snapshot: null,
+  defaultSnapshot: null,
   counters: null,
   runs: 0,
 };
@@ -39,6 +40,10 @@ const elements = {
   runsInput: document.querySelector("#runs-input"),
   seedInput: document.querySelector("#seed-input"),
   runButton: document.querySelector("#run-button"),
+  dataFile: document.querySelector("#data-file"),
+  exportButton: document.querySelector("#export-button"),
+  resetDataButton: document.querySelector("#reset-data-button"),
+  dataMessage: document.querySelector("#data-message"),
   teamSelect: document.querySelector("#team-select"),
   teamFocus: document.querySelector("#team-focus"),
   homeSelect: document.querySelector("#home-select"),
@@ -53,6 +58,8 @@ const elements = {
   playedCount: document.querySelector("#played-count"),
   groupsGrid: document.querySelector("#groups-grid"),
 };
+
+const STORAGE_KEY = "football-simulation:snapshot";
 
 function mulberry32(seed) {
   let value = seed >>> 0;
@@ -520,22 +527,17 @@ function fillTeamSelectors(snapshot) {
   elements.teamSelect.innerHTML = options;
   elements.homeSelect.innerHTML = options;
   elements.awaySelect.innerHTML = options;
-  elements.teamSelect.value = "South Korea";
-  elements.homeSelect.value = "South Korea";
-  elements.awaySelect.value = "Japan";
+  elements.teamSelect.value = teams.includes("South Korea") ? "South Korea" : teams[0];
+  elements.homeSelect.value = teams.includes("South Korea") ? "South Korea" : teams[0];
+  elements.awaySelect.value = teams.includes("Japan") ? "Japan" : teams.find((team) => team !== elements.homeSelect.value) ?? teams[0];
 }
 
 async function init() {
   try {
-    const response = await fetch("../data/world_cup_2026_snapshot.json");
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const snapshot = await response.json();
-    state.snapshot = snapshot;
-    const played = snapshot.matches.filter((match) => Array.isArray(match.score)).length;
-    elements.snapshotStatus.textContent = snapshot.as_of;
-    elements.playedCount.textContent = `${played} played matches`;
-    fillTeamSelectors(snapshot);
-    renderCurrentGroups(snapshot);
+    const defaultSnapshot = await fetchSnapshot();
+    state.defaultSnapshot = defaultSnapshot;
+    const storedSnapshot = loadStoredSnapshot();
+    setSnapshot(storedSnapshot ?? defaultSnapshot, storedSnapshot ? "Local data" : "Sample data");
     await runSimulation();
     renderMatchPrediction();
   } catch (error) {
@@ -544,7 +546,101 @@ async function init() {
   }
 }
 
+function setSnapshot(snapshot, label) {
+  state.snapshot = snapshot;
+  const played = snapshot.matches.filter((match) => Array.isArray(match.score)).length;
+  elements.snapshotStatus.textContent = `${label} - ${snapshot.as_of ?? "custom"}`;
+  elements.playedCount.textContent = `${played} played matches`;
+  elements.dataMessage.textContent = label;
+  fillTeamSelectors(snapshot);
+  renderCurrentGroups(snapshot);
+}
+
+function loadStoredSnapshot() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    validateSnapshot(parsed);
+    return parsed;
+  } catch (_error) {
+    localStorage.removeItem(STORAGE_KEY);
+    return null;
+  }
+}
+
+function validateSnapshot(snapshot) {
+  if (!snapshot || typeof snapshot !== "object") throw new Error("Invalid snapshot");
+  if (!snapshot.groups || typeof snapshot.groups !== "object") throw new Error("Missing groups");
+  if (!snapshot.ratings || typeof snapshot.ratings !== "object") throw new Error("Missing ratings");
+  if (!Array.isArray(snapshot.matches)) throw new Error("Missing matches");
+}
+
+async function importData(file) {
+  if (!file) return;
+  try {
+    const text = await file.text();
+    const snapshot = JSON.parse(text);
+    validateSnapshot(snapshot);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
+    setSnapshot(snapshot, "Imported data");
+    await runSimulation();
+    renderMatchPrediction();
+  } catch (error) {
+    elements.dataMessage.innerHTML = `<span class="error">${error.message}</span>`;
+  } finally {
+    elements.dataFile.value = "";
+  }
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(state.snapshot, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "football-simulation-data.json";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+async function resetData() {
+  localStorage.removeItem(STORAGE_KEY);
+  setSnapshot(state.defaultSnapshot, "Sample data");
+  await runSimulation();
+  renderMatchPrediction();
+}
+
+async function fetchSnapshot() {
+  const candidates = [
+    "data/world_cup_2026_snapshot.json",
+    "../data/world_cup_2026_snapshot.json",
+  ];
+
+  for (const url of candidates) {
+    try {
+      const response = await fetch(url);
+      if (response.ok) return await response.json();
+    } catch (_error) {
+      // Try the next candidate. Capacitor bundles use web/data, while local
+      // repository servers can also read ../data from the project root.
+    }
+  }
+
+  throw new Error("Could not load tournament data");
+}
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
+
 elements.runButton.addEventListener("click", runSimulation);
+elements.dataFile.addEventListener("change", () => importData(elements.dataFile.files[0]));
+elements.exportButton.addEventListener("click", exportData);
+elements.resetDataButton.addEventListener("click", resetData);
 elements.teamSelect.addEventListener("change", renderTeamFocus);
 elements.matchButton.addEventListener("click", renderMatchPrediction);
 elements.homeSelect.addEventListener("change", renderMatchPrediction);

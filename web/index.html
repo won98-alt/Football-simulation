@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Football Simulation</title>
+    <meta name="theme-color" content="#0f766e">
+    <meta name="description" content="Offline-first football match and tournament simulation.">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -32,6 +36,19 @@
             <button id="run-button" class="primary-button" type="button">
               Run
             </button>
+          </section>
+
+          <section class="panel-section">
+            <h2>Data</h2>
+            <label for="data-file">Import JSON</label>
+            <input id="data-file" type="file" accept="application/json">
+            <button id="export-button" class="secondary-button" type="button">
+              Export
+            </button>
+            <button id="reset-data-button" class="plain-button" type="button">
+              Reset Sample
+            </button>
+            <div id="data-message" class="data-message"></div>
           </section>
 
           <section class="panel-section">

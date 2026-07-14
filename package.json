@@ -1,0 +1,21 @@
+{
+  "name": "football-simulation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Offline-first football simulation web app prepared for Android packaging.",
+  "scripts": {
+    "serve": "python3 -m http.server 8000",
+    "check:web": "node --check web/app.js",
+    "android:add": "cap add android",
+    "android:sync": "cap sync android",
+    "android:open": "cap open android",
+    "android:bundle": "cd android && ./gradlew bundleRelease"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.4.1",
+    "@capacitor/core": "^8.4.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.4.1"
+  }
+}

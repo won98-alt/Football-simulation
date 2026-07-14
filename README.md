@@ -8,11 +8,14 @@ remaining match from the snapshot date.
 
 ## Current status
 
-This project is currently a command-line Python program.
+This project is currently a command-line Python simulator plus an offline-first
+browser UI that is prepared for Android packaging.
 
 What exists now:
 
 - Browser UI in `web/`
+- Progressive Web App manifest and service worker
+- Capacitor configuration for Android packaging
 - Terminal/CLI usage through `python3 worldcup_simulator.py`
 - 2026 World Cup group-stage and knockout simulation
 - JSON-based tournament data in `data/world_cup_2026_snapshot.json`
@@ -28,6 +31,40 @@ What does not exist yet:
 All current commands are for the 2026 World Cup data snapshot. The simulation
 engine can be generalized later, but the repository has not yet been refactored
 into a general football prediction framework.
+
+## Android and Play Store path
+
+The recommended mobile path is an offline-first Android app built from the
+existing web UI with Capacitor.
+
+Core idea:
+
+- bundle the prediction engine and UI inside the app
+- bundle sample data in `web/data/world_cup_2026_snapshot.json`
+- let users edit or import data locally in future versions
+- treat online search/API imports as optional helpers, not required runtime
+  infrastructure
+
+Install Java and Android Studio first. Android Studio provides the Android SDK
+and Gradle tooling required for release builds.
+
+Then run:
+
+```bash
+pnpm install
+pnpm android:add
+pnpm android:sync
+pnpm android:open
+```
+
+After Android signing is configured, build a Play Store bundle:
+
+```bash
+pnpm android:bundle
+```
+
+See `docs/play-store-path.md` for the release checklist and long-term data
+strategy.
 
 ## Web UI
 
@@ -50,9 +87,13 @@ The web UI shows:
 - current group standings
 - focused team probabilities
 - single-match win/draw/loss prediction for teams in the snapshot
+- JSON import/export for user-managed data
+- sample-data reset
 
-The UI reads `data/world_cup_2026_snapshot.json`, so changing scores or ratings
-in that file changes the browser results after refresh.
+The UI first reads `web/data/world_cup_2026_snapshot.json`, which is bundled
+for mobile builds. When running directly from the repository, it can also fall
+back to `data/world_cup_2026_snapshot.json`. Imported data is saved in the
+browser or Android WebView local storage.
 
 ## Run
 

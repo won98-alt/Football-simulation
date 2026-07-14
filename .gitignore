@@ -1,0 +1,10 @@
+node_modules/
+.pnpm-store/
+.DS_Store
+android/.gradle/
+android/app/build/
+android/build/
+*.jks
+*.keystore
+*.aab
+*.apk
