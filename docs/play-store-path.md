@@ -26,23 +26,64 @@ Android versions may eventually stop seeing or installing it from Play Store.
 
 ## Local development
 
-Install Java and Android Studio first. Android Studio supplies the Android SDK
-and Gradle tooling needed to build release bundles.
+Install JDK 21 and Android command-line tools first. Capacitor 8 uses Java 21
+source compatibility for its Android build.
+
+On Apple Silicon macOS with Homebrew:
+
+```bash
+HOMEBREW_NO_AUTO_UPDATE=1 brew install openjdk@21 android-commandlinetools
+```
+
+Prepare the SDK:
+
+```bash
+export JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home
+yes | sdkmanager --sdk_root=/opt/homebrew/share/android-commandlinetools --licenses
+sdkmanager --sdk_root=/opt/homebrew/share/android-commandlinetools \
+  "platform-tools" \
+  "platforms;android-36" \
+  "build-tools;36.0.0"
+```
+
+Create `android/local.properties`:
+
+```properties
+sdk.dir=/opt/homebrew/share/android-commandlinetools
+```
 
 Then run:
 
 ```bash
 pnpm install
-pnpm android:add
 pnpm android:sync
-pnpm android:open
+pnpm android:debug
 ```
 
-Build a release bundle after signing is configured:
+Build a signed release bundle:
 
 ```bash
 pnpm android:bundle
 ```
+
+The release bundle is generated at:
+
+```text
+android/app/build/outputs/bundle/release/app-release.aab
+```
+
+## Signing
+
+Release signing is configured through local ignored files:
+
+```text
+android/keystore.properties
+android/keystores/football-simulation-upload.jks
+```
+
+Keep both files backed up in a password manager or secure storage. If the upload
+key is lost, future Play Store updates become painful and may require a key
+reset process through Play Console.
 
 ## Release checklist
 

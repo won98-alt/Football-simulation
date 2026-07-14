@@ -45,23 +45,59 @@ Core idea:
 - treat online search/API imports as optional helpers, not required runtime
   infrastructure
 
-Install Java and Android Studio first. Android Studio provides the Android SDK
-and Gradle tooling required for release builds.
+Install JDK 21 and Android command-line tools first. On Apple Silicon macOS with
+Homebrew:
+
+```bash
+HOMEBREW_NO_AUTO_UPDATE=1 brew install openjdk@21 android-commandlinetools
+```
+
+Install the required Android SDK packages:
+
+```bash
+export JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home
+yes | sdkmanager --sdk_root=/opt/homebrew/share/android-commandlinetools --licenses
+sdkmanager --sdk_root=/opt/homebrew/share/android-commandlinetools \
+  "platform-tools" \
+  "platforms;android-36" \
+  "build-tools;36.0.0"
+```
+
+Create `android/local.properties`:
+
+```properties
+sdk.dir=/opt/homebrew/share/android-commandlinetools
+```
 
 Then run:
 
 ```bash
 pnpm install
-pnpm android:add
 pnpm android:sync
-pnpm android:open
+pnpm android:debug
 ```
 
-After Android signing is configured, build a Play Store bundle:
+Build a Play Store bundle:
 
 ```bash
 pnpm android:bundle
 ```
+
+The generated files are:
+
+```text
+android/app/build/outputs/apk/debug/app-debug.apk
+android/app/build/outputs/bundle/release/app-release.aab
+```
+
+Release signing uses local ignored files:
+
+```text
+android/keystore.properties
+android/keystores/football-simulation-upload.jks
+```
+
+Back these up safely. They are not committed to GitHub.
 
 See `docs/play-store-path.md` for the release checklist and long-term data
 strategy.

@@ -6,5 +6,7 @@ android/app/build/
 android/build/
 *.jks
 *.keystore
+android/keystore.properties
+android/keystores/
 *.aab
 *.apk

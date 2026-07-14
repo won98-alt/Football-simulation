@@ -9,7 +9,8 @@
     "android:add": "cap add android",
     "android:sync": "cap sync android",
     "android:open": "cap open android",
-    "android:bundle": "cd android && ./gradlew bundleRelease"
+    "android:debug": "cd android && JAVA_HOME=${JAVA_HOME:-/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home} ./gradlew assembleDebug",
+    "android:bundle": "cd android && JAVA_HOME=${JAVA_HOME:-/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home} ./gradlew bundleRelease"
   },
   "dependencies": {
     "@capacitor/android": "^8.4.1",
