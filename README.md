@@ -12,6 +12,7 @@ This project is currently a command-line Python program.
 
 What exists now:
 
+- Browser UI in `web/`
 - Terminal/CLI usage through `python3 worldcup_simulator.py`
 - 2026 World Cup group-stage and knockout simulation
 - JSON-based tournament data in `data/world_cup_2026_snapshot.json`
@@ -19,7 +20,6 @@ What exists now:
 
 What does not exist yet:
 
-- No web page or hosted web app
 - No desktop GUI
 - No chat interface or bot
 - No installable Python package/API framework
@@ -28,6 +28,31 @@ What does not exist yet:
 All current commands are for the 2026 World Cup data snapshot. The simulation
 engine can be generalized later, but the repository has not yet been refactored
 into a general football prediction framework.
+
+## Web UI
+
+Run a local static server from the repository root:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then open:
+
+```text
+http://localhost:8000/web/
+```
+
+The web UI shows:
+
+- champion probability chart
+- team-by-team round probability table
+- current group standings
+- focused team probabilities
+- single-match win/draw/loss prediction for teams in the snapshot
+
+The UI reads `data/world_cup_2026_snapshot.json`, so changing scores or ratings
+in that file changes the browser results after refresh.
 
 ## Run
 

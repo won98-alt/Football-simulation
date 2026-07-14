@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Football Simulation</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">2026 World Cup</p>
+          <h1>Football Simulation</h1>
+        </div>
+        <div class="status-strip">
+          <span id="snapshot-status">Loading data</span>
+          <span id="run-status">Ready</span>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="control-panel" aria-label="Simulation controls">
+          <section class="panel-section">
+            <h2>Simulation</h2>
+            <label for="runs-input">Runs</label>
+            <input id="runs-input" type="number" min="100" max="100000" step="100" value="10000">
+
+            <label for="seed-input">Seed</label>
+            <input id="seed-input" type="number" step="1" value="20260621">
+
+            <button id="run-button" class="primary-button" type="button">
+              Run
+            </button>
+          </section>
+
+          <section class="panel-section">
+            <h2>Team Focus</h2>
+            <label for="team-select">Team</label>
+            <select id="team-select"></select>
+            <div id="team-focus" class="focus-box"></div>
+          </section>
+
+          <section class="panel-section">
+            <h2>Match</h2>
+            <label for="home-select">Home</label>
+            <select id="home-select"></select>
+
+            <label for="away-select">Away</label>
+            <select id="away-select"></select>
+
+            <button id="match-button" class="secondary-button" type="button">
+              Predict
+            </button>
+            <div id="match-result" class="match-result"></div>
+          </section>
+        </aside>
+
+        <section class="main-grid" aria-label="Simulation results">
+          <section class="champion-panel">
+            <div>
+              <p class="eyebrow">Top Pick</p>
+              <h2 id="champion-name">-</h2>
+            </div>
+            <div class="champion-value" id="champion-value">0.0%</div>
+          </section>
+
+          <section class="chart-panel">
+            <div class="section-heading">
+              <h2>Champion Probability</h2>
+              <span id="chart-runs">-</span>
+            </div>
+            <div id="champion-chart" class="bar-list"></div>
+          </section>
+
+          <section class="table-panel">
+            <div class="section-heading">
+              <h2>Round Probabilities</h2>
+              <span>R32 / R16 / QF / SF / Final / Champ</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Team</th>
+                    <th>R32</th>
+                    <th>R16</th>
+                    <th>QF</th>
+                    <th>SF</th>
+                    <th>Final</th>
+                    <th>Champ</th>
+                  </tr>
+                </thead>
+                <tbody id="probability-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="groups-panel">
+            <div class="section-heading">
+              <h2>Current Groups</h2>
+              <span id="played-count">-</span>
+            </div>
+            <div id="groups-grid" class="groups-grid"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
