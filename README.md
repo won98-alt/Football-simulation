@@ -6,6 +6,29 @@ This repository contains a dependency-free Python Monte Carlo simulator for the
 The data snapshot fixes already played group-stage results and simulates every
 remaining match from the snapshot date.
 
+## Current status
+
+This project is currently a command-line Python program.
+
+What exists now:
+
+- Terminal/CLI usage through `python3 worldcup_simulator.py`
+- 2026 World Cup group-stage and knockout simulation
+- JSON-based tournament data in `data/world_cup_2026_snapshot.json`
+- Unit tests with Python `unittest`
+
+What does not exist yet:
+
+- No web page or hosted web app
+- No desktop GUI
+- No chat interface or bot
+- No installable Python package/API framework
+- No generic overseas-club-football commands yet
+
+All current commands are for the 2026 World Cup data snapshot. The simulation
+engine can be generalized later, but the repository has not yet been refactored
+into a general football prediction framework.
+
 ## Run
 
 ```bash
@@ -23,6 +46,29 @@ Show one simulated tournament path:
 ```bash
 python3 worldcup_simulator.py --one --seed 7
 ```
+
+## Overseas football support
+
+Overseas club football simulation is not implemented yet.
+
+These commands do not exist yet:
+
+```bash
+python3 worldcup_simulator.py --match "Liverpool" "Manchester City"
+python3 worldcup_simulator.py --league epl
+python3 worldcup_simulator.py --competition champions-league
+```
+
+To support leagues such as the Premier League, La Liga, Serie A, Bundesliga, or
+the Champions League, the project needs a generic prediction layer, for example:
+
+- `predictor.py` for match win/draw/loss and score probabilities
+- `competitions.py` for league, cup, group-stage, and knockout rules
+- `data/club_ratings.json` for club strength ratings
+- `data/fixtures.json` and `data/results.json` for schedules and played results
+
+The existing Poisson scoring model and Monte Carlo loop can be reused for that
+future version.
 
 ## Snapshot
 
