@@ -1,0 +1,183 @@
+{
+  "name": "2026 FIFA World Cup current-data snapshot",
+  "as_of": "2026-06-21 Asia/Seoul",
+  "notes": [
+    "Played scores are fixed; unplayed matches are simulated.",
+    "Ratings are pragmatic strength inputs for simulation, not official FIFA Elo ratings.",
+    "Third-place knockout slot assignment uses the published eligible-group slots with deterministic backtracking."
+  ],
+  "sources": [
+    {
+      "label": "TechRadar World Cup 2026 schedule and group tables",
+      "url": "https://www.techradar.com/how-to-watch/football/world-cup-2026-free"
+    },
+    {
+      "label": "Guardian: USA 2-0 Australia",
+      "url": "https://www.theguardian.com/football/live/2026/jun/19/usa-v-australia-world-cup-2026-live"
+    },
+    {
+      "label": "Guardian: Scotland 0-1 Morocco",
+      "url": "https://www.theguardian.com/football/live/2026/jun/19/scotland-v-morocco-world-cup-2026-live"
+    },
+    {
+      "label": "Guardian: Brazil 3-0 Haiti",
+      "url": "https://www.theguardian.com/football/live/2026/jun/20/fifa-world-cup-2026-live-brazil-v-haiti-updates-bra-vs-hai-group-c-match-score-latest"
+    },
+    {
+      "label": "Guardian: Turkey 0-1 Paraguay",
+      "url": "https://www.theguardian.com/football/live/2026/jun/20/fifa-world-cup-2026-live-turkey-v-paraguay-updates-tur-vs-par-group-d-match-score-latest"
+    },
+    {
+      "label": "Wikipedia: 2026 FIFA World Cup format and bracket",
+      "url": "https://en.wikipedia.org/wiki/2026_FIFA_World_Cup"
+    }
+  ],
+  "groups": {
+    "A": ["Mexico", "South Africa", "South Korea", "Czech Republic"],
+    "B": ["Canada", "Bosnia and Herzegovina", "Qatar", "Switzerland"],
+    "C": ["Brazil", "Morocco", "Haiti", "Scotland"],
+    "D": ["USA", "Paraguay", "Australia", "Turkey"],
+    "E": ["Germany", "Curacao", "Ivory Coast", "Ecuador"],
+    "F": ["Netherlands", "Japan", "Sweden", "Tunisia"],
+    "G": ["Belgium", "Egypt", "Iran", "New Zealand"],
+    "H": ["Spain", "Cape Verde", "Saudi Arabia", "Uruguay"],
+    "I": ["France", "Senegal", "Iraq", "Norway"],
+    "J": ["Argentina", "Algeria", "Jordan", "Austria"],
+    "K": ["Portugal", "DR Congo", "Uzbekistan", "Colombia"],
+    "L": ["England", "Croatia", "Panama", "Ghana"]
+  },
+  "ratings": {
+    "Argentina": 1888,
+    "Spain": 1872,
+    "France": 1864,
+    "England": 1848,
+    "Brazil": 1842,
+    "Portugal": 1828,
+    "Netherlands": 1816,
+    "Belgium": 1795,
+    "Germany": 1788,
+    "Colombia": 1770,
+    "Uruguay": 1763,
+    "Croatia": 1755,
+    "Morocco": 1745,
+    "USA": 1728,
+    "Switzerland": 1715,
+    "Japan": 1708,
+    "Mexico": 1702,
+    "Senegal": 1692,
+    "Ecuador": 1688,
+    "Sweden": 1682,
+    "Austria": 1675,
+    "Iran": 1662,
+    "South Korea": 1654,
+    "Australia": 1648,
+    "Norway": 1644,
+    "Ivory Coast": 1634,
+    "Canada": 1628,
+    "Turkey": 1622,
+    "Egypt": 1616,
+    "Qatar": 1588,
+    "Saudi Arabia": 1582,
+    "Czech Republic": 1578,
+    "Paraguay": 1574,
+    "Ghana": 1568,
+    "Tunisia": 1562,
+    "South Africa": 1554,
+    "Algeria": 1548,
+    "Bosnia and Herzegovina": 1542,
+    "DR Congo": 1538,
+    "Iraq": 1532,
+    "Panama": 1518,
+    "Uzbekistan": 1510,
+    "Jordan": 1496,
+    "Cape Verde": 1490,
+    "Haiti": 1468,
+    "New Zealand": 1460,
+    "Curacao": 1448
+  },
+  "matches": [
+    {"group": "A", "date": "2026-06-11", "home": "Mexico", "away": "South Africa", "score": [2, 0]},
+    {"group": "A", "date": "2026-06-12", "home": "South Korea", "away": "Czech Republic", "score": [2, 1]},
+    {"group": "A", "date": "2026-06-18", "home": "Czech Republic", "away": "South Africa", "score": [1, 1]},
+    {"group": "A", "date": "2026-06-19", "home": "Mexico", "away": "South Korea", "score": [1, 0]},
+    {"group": "A", "date": "2026-06-24", "home": "Czech Republic", "away": "Mexico"},
+    {"group": "A", "date": "2026-06-24", "home": "South Africa", "away": "South Korea"},
+
+    {"group": "B", "date": "2026-06-12", "home": "Canada", "away": "Bosnia and Herzegovina", "score": [1, 1]},
+    {"group": "B", "date": "2026-06-13", "home": "Qatar", "away": "Switzerland", "score": [1, 1]},
+    {"group": "B", "date": "2026-06-18", "home": "Switzerland", "away": "Bosnia and Herzegovina", "score": [4, 1]},
+    {"group": "B", "date": "2026-06-18", "home": "Canada", "away": "Qatar", "score": [6, 0]},
+    {"group": "B", "date": "2026-06-24", "home": "Switzerland", "away": "Canada"},
+    {"group": "B", "date": "2026-06-24", "home": "Bosnia and Herzegovina", "away": "Qatar"},
+
+    {"group": "C", "date": "2026-06-13", "home": "Brazil", "away": "Morocco", "score": [1, 1]},
+    {"group": "C", "date": "2026-06-14", "home": "Haiti", "away": "Scotland", "score": [0, 1]},
+    {"group": "C", "date": "2026-06-19", "home": "Scotland", "away": "Morocco", "score": [0, 1]},
+    {"group": "C", "date": "2026-06-20", "home": "Brazil", "away": "Haiti", "score": [3, 0]},
+    {"group": "C", "date": "2026-06-24", "home": "Scotland", "away": "Brazil"},
+    {"group": "C", "date": "2026-06-24", "home": "Morocco", "away": "Haiti"},
+
+    {"group": "D", "date": "2026-06-13", "home": "USA", "away": "Paraguay", "score": [4, 1]},
+    {"group": "D", "date": "2026-06-14", "home": "Australia", "away": "Turkey", "score": [2, 0]},
+    {"group": "D", "date": "2026-06-19", "home": "USA", "away": "Australia", "score": [2, 0]},
+    {"group": "D", "date": "2026-06-20", "home": "Turkey", "away": "Paraguay", "score": [0, 1]},
+    {"group": "D", "date": "2026-06-25", "home": "Turkey", "away": "USA"},
+    {"group": "D", "date": "2026-06-25", "home": "Paraguay", "away": "Australia"},
+
+    {"group": "E", "date": "2026-06-14", "home": "Germany", "away": "Curacao", "score": [7, 1]},
+    {"group": "E", "date": "2026-06-15", "home": "Ivory Coast", "away": "Ecuador", "score": [1, 0]},
+    {"group": "E", "date": "2026-06-20", "home": "Germany", "away": "Ivory Coast"},
+    {"group": "E", "date": "2026-06-20", "home": "Ecuador", "away": "Curacao"},
+    {"group": "E", "date": "2026-06-25", "home": "Curacao", "away": "Ivory Coast"},
+    {"group": "E", "date": "2026-06-25", "home": "Ecuador", "away": "Germany"},
+
+    {"group": "F", "date": "2026-06-14", "home": "Netherlands", "away": "Japan", "score": [2, 2]},
+    {"group": "F", "date": "2026-06-15", "home": "Sweden", "away": "Tunisia", "score": [5, 1]},
+    {"group": "F", "date": "2026-06-20", "home": "Netherlands", "away": "Sweden"},
+    {"group": "F", "date": "2026-06-20", "home": "Tunisia", "away": "Japan"},
+    {"group": "F", "date": "2026-06-25", "home": "Japan", "away": "Sweden"},
+    {"group": "F", "date": "2026-06-25", "home": "Tunisia", "away": "Netherlands"},
+
+    {"group": "G", "date": "2026-06-15", "home": "Belgium", "away": "Egypt", "score": [1, 1]},
+    {"group": "G", "date": "2026-06-16", "home": "Iran", "away": "New Zealand", "score": [2, 2]},
+    {"group": "G", "date": "2026-06-21", "home": "Belgium", "away": "Iran"},
+    {"group": "G", "date": "2026-06-21", "home": "New Zealand", "away": "Egypt"},
+    {"group": "G", "date": "2026-06-26", "home": "Egypt", "away": "Iran"},
+    {"group": "G", "date": "2026-06-26", "home": "New Zealand", "away": "Belgium"},
+
+    {"group": "H", "date": "2026-06-15", "home": "Spain", "away": "Cape Verde", "score": [0, 0]},
+    {"group": "H", "date": "2026-06-15", "home": "Saudi Arabia", "away": "Uruguay", "score": [1, 1]},
+    {"group": "H", "date": "2026-06-21", "home": "Uruguay", "away": "Cape Verde"},
+    {"group": "H", "date": "2026-06-21", "home": "Spain", "away": "Saudi Arabia"},
+    {"group": "H", "date": "2026-06-26", "home": "Cape Verde", "away": "Saudi Arabia"},
+    {"group": "H", "date": "2026-06-26", "home": "Uruguay", "away": "Spain"},
+
+    {"group": "I", "date": "2026-06-16", "home": "France", "away": "Senegal", "score": [3, 1]},
+    {"group": "I", "date": "2026-06-16", "home": "Iraq", "away": "Norway", "score": [1, 4]},
+    {"group": "I", "date": "2026-06-22", "home": "Norway", "away": "Senegal"},
+    {"group": "I", "date": "2026-06-22", "home": "France", "away": "Iraq"},
+    {"group": "I", "date": "2026-06-26", "home": "Norway", "away": "France"},
+    {"group": "I", "date": "2026-06-26", "home": "Senegal", "away": "Iraq"},
+
+    {"group": "J", "date": "2026-06-16", "home": "Argentina", "away": "Algeria", "score": [3, 0]},
+    {"group": "J", "date": "2026-06-16", "home": "Austria", "away": "Jordan", "score": [3, 1]},
+    {"group": "J", "date": "2026-06-22", "home": "Argentina", "away": "Austria"},
+    {"group": "J", "date": "2026-06-22", "home": "Jordan", "away": "Algeria"},
+    {"group": "J", "date": "2026-06-27", "home": "Algeria", "away": "Austria"},
+    {"group": "J", "date": "2026-06-27", "home": "Jordan", "away": "Argentina"},
+
+    {"group": "K", "date": "2026-06-17", "home": "Portugal", "away": "DR Congo", "score": [1, 1]},
+    {"group": "K", "date": "2026-06-18", "home": "Uzbekistan", "away": "Colombia", "score": [1, 3]},
+    {"group": "K", "date": "2026-06-23", "home": "Portugal", "away": "Uzbekistan"},
+    {"group": "K", "date": "2026-06-23", "home": "Colombia", "away": "DR Congo"},
+    {"group": "K", "date": "2026-06-27", "home": "Colombia", "away": "Portugal"},
+    {"group": "K", "date": "2026-06-27", "home": "DR Congo", "away": "Uzbekistan"},
+
+    {"group": "L", "date": "2026-06-17", "home": "England", "away": "Croatia", "score": [4, 2]},
+    {"group": "L", "date": "2026-06-18", "home": "Ghana", "away": "Panama", "score": [1, 0]},
+    {"group": "L", "date": "2026-06-23", "home": "England", "away": "Ghana"},
+    {"group": "L", "date": "2026-06-23", "home": "Panama", "away": "Croatia"},
+    {"group": "L", "date": "2026-06-27", "home": "Panama", "away": "England"},
+    {"group": "L", "date": "2026-06-27", "home": "Croatia", "away": "Ghana"}
+  ]
+}
